@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    backgroundImage: {
+      'search': "url('./icons/SearchIcon.svg')",
+    },
     extend: {},
   },
   plugins: [],
