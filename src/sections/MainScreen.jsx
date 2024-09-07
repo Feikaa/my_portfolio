@@ -8,25 +8,7 @@ const MainScreen = () => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [icons, setIcons] = useState([PDF]);
-  const [hover, setHover] = useState(-1);
   const [positions, setPositions] = useState([{ x: 0, y: 0}]);
-
-  const [deltaPosition, setDeltaPosition] = useState([0, 0]);
-
-  const handleDrag = (e, ui) => {
-    setDeltaPosition([e.clientX, e.clientY]);
-  };
-
-  const handleClick = (e) => {
-    
-    e = e || window.e;
-    var target = e.srcElement;
-    console.log([e.clientX, e.clientY]);
-    var rect = target.getBoundingClientRect();
-    console.log(rect.top, rect.left, rect.bottom, rect.right);
-
-    // console.log(isInAnIcon(e.clientX, e.clientY));
-  }
 
   const isInAnIcon = (x,y) => {
     if (x < 0 || x > width || y < 0 || y > height) {
@@ -58,11 +40,6 @@ const MainScreen = () => {
     }
   }
 
-  const handleHover = (index) => {
-    console.log("hovered over " + index);
-    setHover(index);
-  }
-
   useEffect(() => {
     // when the component gets mounted
     setWidth(ref.current.offsetWidth - 16);
@@ -92,7 +69,7 @@ const MainScreen = () => {
         <Grid container spacing={5} className='w-full' column={16}>
             {icons.map((c, index) => {
                 return (
-                    <Draggable position={positions[index]} onDrag={handleDrag} onStop={(e, ui) => handleStop(e, ui, index)} >
+                    <Draggable position={positions[index]} onStop={(e, ui) => handleStop(e, ui, index)} >
                       <Grid item>
                         <div className='items-center justify-center align-middle flex-col w-20 h-20 text-white text-center'><img src={PDF} key={c} className='w-16 h-16 pointer-events-none block m-auto' /><div className='w-16 h-16 block m-auto'>My Resume</div></div>
                       </Grid>
