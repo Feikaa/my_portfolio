@@ -3,6 +3,7 @@ import PDF from '../icons/pdf.svg';
 import Folder from '../icons/folder.svg';
 import Grid from '@mui/material/Grid2';
 import Draggable from 'react-draggable';
+import Window from './Window';
 
 const MainScreen = () => {
   const ref = useRef(null);
@@ -12,6 +13,7 @@ const MainScreen = () => {
   const [icons, setIcons] = useState([PDF, Folder]);
   const [names, setNames] = useState(["My Resume", "My Projects"]);
   const [positions, setPositions] = useState([{ x: 0, y: 0}, { x: 120, y: 0}]);
+  const [currentWindows, setCurrentWindows] = useState([]);
 
   const isInAnIcon = (x,y) => {
     if (x < 40 || x > width-40 || y < 0 || y > height-96) {
@@ -43,6 +45,12 @@ const MainScreen = () => {
     console.log([e.clientX, e.clientY]);
     console.log(isInAnIcon(e.clientX, e.clientY))
     console.log(snapToGrid(e.clientX, e.clientY));
+  }
+
+  const handleDblClick = (file) => {
+    if (file === "resume") {
+      setCurrentWindows((prev) => [file, ...prev]);
+    }
   }
 
   const snapToGrid = (x,y) => {
@@ -116,7 +124,7 @@ const MainScreen = () => {
                 return (
                     <Draggable position={positions[index]} onStop={(e, ui) => handleStop(e, ui, index)} onTouchEnd={(e, ui) => handleStop(e, ui, index)}>
                       <Grid item>
-                        <div tabIndex="0" className={`absolute items-center justify-center align-middle flex-col w-28 h-28 text-white text-center ${pressing ? '' : 'hover:bg-sky-500 focus-within:bg-blue-500'}`}><img src={icons[index]} key={c} className='w-16 h-16 pointer-events-none block m-auto' /><div className='text-sm w-16 h-8 block m-auto'>{names[index]}</div></div>
+                        <div onDoubleClick={() => {handleDblClick("resume")}} tabIndex="0" className={`absolute items-center justify-center align-middle flex-col w-28 h-28 text-white text-center ${pressing ? '' : 'hover:bg-sky-500 focus-within:bg-blue-500'}`}><img src={icons[index]} key={c} className='w-16 h-16 pointer-events-none block m-auto' /><div className='text-sm w-16 h-8 block m-auto'>{names[index]}</div></div>
                       </Grid>
                   </Draggable>
                   )
@@ -129,7 +137,14 @@ const MainScreen = () => {
               // }
               }
               )}
-            {/* <button onClick={() => {setIcons((icons) => [null, ...icons])}}>Press</button> */}
+            
+            {currentWindows.map((name) => {
+              if (name === "resume") {
+                return (
+                  <Window />
+                )
+              }
+            })}
         </Grid>
       </section>
   )
