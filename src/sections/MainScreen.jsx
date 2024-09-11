@@ -14,7 +14,7 @@ const MainScreen = () => {
   const [positions, setPositions] = useState([{ x: 0, y: 0}, { x: 120, y: 0}]);
 
   const isInAnIcon = (x,y) => {
-    if (x < 40 || x > width || y < 0 || y > height) {
+    if (x < 40 || x > width-40 || y < 0 || y > height-96) {
       return false;
     }
     
@@ -25,6 +25,15 @@ const MainScreen = () => {
     let inSquareY = (ay % (120)) < 80;
 
     return inSquareX && inSquareY;
+  }
+
+  const isOnAnIcon = (xy) => {
+    for (const coords of positions) {
+      if (coords.x === xy.x && coords.y === xy.y) {
+        return true;
+      }
+    }
+    return false;
   }
 
   const handleClick = (e) => {
@@ -53,7 +62,7 @@ const MainScreen = () => {
       x = e.changedTouches[0].clientX;
       y = e.changedTouches[0].clientY;
     }
-    if (isInAnIcon(x, y)) {
+    if (isInAnIcon(x, y) && !isOnAnIcon(snapToGrid(x, y))) {
       const newPosition = snapToGrid(x, y);
       const updatedPositions = [...positions];
       updatedPositions[index] = newPosition;
@@ -107,7 +116,7 @@ const MainScreen = () => {
                 return (
                     <Draggable position={positions[index]} onStop={(e, ui) => handleStop(e, ui, index)} onTouchEnd={(e, ui) => handleStop(e, ui, index)}>
                       <Grid item>
-                        <div tabIndex="0" className={`absolute items-center justify-center align-middle flex-col w-20 h-28 text-white text-center ${pressing ? '' : 'hover:bg-sky-500 focus-within:bg-blue-500'}`}><img src={icons[index]} key={c} className='w-16 h-16 pointer-events-none block m-auto' /><div className='text-sm w-16 h-8 block m-auto'>{names[index]}</div></div>
+                        <div tabIndex="0" className={`absolute items-center justify-center align-middle flex-col w-28 h-28 text-white text-center ${pressing ? '' : 'hover:bg-sky-500 focus-within:bg-blue-500'}`}><img src={icons[index]} key={c} className='w-16 h-16 pointer-events-none block m-auto' /><div className='text-sm w-16 h-8 block m-auto'>{names[index]}</div></div>
                       </Grid>
                   </Draggable>
                   )
