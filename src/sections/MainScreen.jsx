@@ -48,8 +48,10 @@ const MainScreen = () => {
   }
 
   const handleDblClick = (file) => {
-    if (file === "resume") {
-      setCurrentWindows((prev) => [file, ...prev]);
+    if (!currentWindows.includes(file)) {
+      if (file === "resume") {
+        setCurrentWindows((prev) => [file, ...prev]);
+      }
     }
   }
 
@@ -141,7 +143,7 @@ const MainScreen = () => {
             {currentWindows.map((name) => {
               if (name === "resume") {
                 return (
-                  <Window />
+                  <Window currentWindows={currentWindows} setCurrentWindows={setCurrentWindows} />
                 )
               }
             })}
