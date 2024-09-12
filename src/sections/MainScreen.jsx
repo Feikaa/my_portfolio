@@ -143,7 +143,7 @@ const MainScreen = () => {
             {currentWindows.map((name) => {
               if (name === "resume") {
                 return (
-                  <Window currentWindows={currentWindows} setCurrentWindows={setCurrentWindows} />
+                  <Window currentWindows={currentWindows} setCurrentWindows={setCurrentWindows} width={width} />
                 )
               }
             })}

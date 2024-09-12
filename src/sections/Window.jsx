@@ -12,6 +12,7 @@ function Window(props) {
   const [position, setPosition] = useState({ x: 100, y: 100});
   const currentWindows = props.currentWindows;
   const setCurrentWindows = props.setCurrentWindows;
+  const isPhone = props.width <= 768;
 
   const toggleMaximized = () => {
     setMaximized(!maximized);
@@ -50,9 +51,13 @@ function Window(props) {
       <div className='flex flex-col h-full border-2 border-solid relative'>
         <div className='px-4 py-2 cursor-move select-none flex items-center justify-center custom-header'>
           <span className='font-semibold'>Resume</span>
-          {<div className='flex space-x-2 ml-auto'>
+          {!isPhone ? <div className='flex space-x-2 ml-auto'>
           <button className='w-6 h-6 flex justify-center items-center hover:bg-blue-500 transition rounded'>_</button>
           <button className='w-6 h-6 flex justify-center items-center hover:bg-blue-500 transition rounded' onClick={toggleMaximized}>{maximized ? '🗗' : '🗖'}</button>
+          <button className='w-6 h-6 flex justify-center items-center hover:bg-red-500 transition rounded' onClick={handleClose}>X</button>
+          </div>
+          :
+          <div className='flex space-x-2 ml-auto'>
           <button className='w-6 h-6 flex justify-center items-center hover:bg-red-500 transition rounded' onClick={handleClose}>X</button>
           </div>}
         </div>
