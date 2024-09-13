@@ -1,0 +1,21 @@
+.animated-div {
+    width: 0;
+    transition: growWidth 1s ease forwards;
+}
+
+.grow {
+    width: 100%;
+}
+
+.shrink {
+    width: 0;
+}
+
+@keyframes growWidth {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
