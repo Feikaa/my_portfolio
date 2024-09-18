@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TaskBar.css';
+import Logo from '../icons/logo.png';
 
 const TaskBar = (props) => {
   const [search, setSearch] = useState('');
@@ -10,7 +11,8 @@ const TaskBar = (props) => {
   return (
     <footer className='w-full h-14 bg-blue-600/60 sticky top-full p-2 items-center flex space-x-4'>
         <button className='w-10 h-10 rounded-lg bg-white/0 hover:bg-white/70 transition ease-in-out items-center justify-center flex font-bold shadow-md'>
-            <p>PL</p>
+            {/* <p>PL</p> */}
+            <img src={Logo}></img>
         </button>
 
         {isPhone ? '' 
