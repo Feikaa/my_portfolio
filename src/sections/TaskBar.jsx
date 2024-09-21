@@ -7,6 +7,8 @@ const TaskBar = (props) => {
   const windows = props.windows;
   const isPhone = window.innerWidth <= 768;
   const toggleMinimize = props.toggleMinimize;
+  const bringToFront = props.bringToFront;
+  const focusedWindow = props.focusedWindow;
 
   return (
     <footer className='w-full h-14 bg-blue-600/60 sticky top-full p-2 items-center flex space-x-4'>
@@ -28,7 +30,15 @@ const TaskBar = (props) => {
         }
         {windows.map((window, index) => {
           return (
-            <div className={`flex rounded ${window.minimized ? 'shadow-inner' : 'shadow-sm'} shadow-black items-center justify-center bg-blue-400 w-40 h-8 hover:bg-blue-300 select-none`}  onClick={() => toggleMinimize(window.id)}>{window.id}</div>
+            <div className={`flex rounded ${window.minimized ? 'shadow-inner' : focusedWindow === window.id ? 'shadow-none' : 'shadow-sm'} shadow-black items-center justify-center bg-blue-400 w-40 h-8 hover:bg-blue-300 select-none`} 
+              onClick={() => {
+                if (focusedWindow === window.id) {
+                  toggleMinimize(window.id);
+                }
+                else {
+                  bringToFront(window.id);
+                }
+              }}>{window.id}</div>
           )
         })}
     </footer>

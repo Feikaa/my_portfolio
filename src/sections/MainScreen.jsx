@@ -21,6 +21,8 @@ const MainScreen = (props) => {
   const updateWindow = props.updateWindow;
   const toggleMaximize = props.toggleMaximize;
   const toggleMinimize = props.toggleMinimize;
+  const focusedWindow = props.focusedWindow;
+  const bringToFront = props.bringToFront;
 
   const isInAnIcon = (x,y) => {
     if (x < 40 || x > width-40 || y < 0 || y > height-96) {
@@ -150,7 +152,9 @@ const MainScreen = (props) => {
                         toggleMaximize={() => toggleMaximize(window.id)} 
                         toggleMinimize={() => toggleMinimize(window.id)} 
                         width={width} 
-                        handleClose={() => handleClose(window.id)} />
+                        handleClose={() => handleClose(window.id)}
+                        bringToFront={() => bringToFront(window.id)}
+                        focusedWindow={focusedWindow} />
               )
             })}
         </Grid>

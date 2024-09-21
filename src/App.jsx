@@ -4,6 +4,11 @@ import MainScreen from './sections/MainScreen'
 
 const App = () => {
   const [windows, setWindows] = useState([]);
+  const [focusedWindow, setFocusedWindow] = useState(null);
+
+  const bringToFront = (id) => {
+    setFocusedWindow(id);
+  }
 
   const openWindow = (id) => {
     const windowExists = windows.some((window) => window.id === id);
@@ -50,8 +55,10 @@ const App = () => {
                   updateWindow={updateWindow} 
                   toggleMinimize={toggleMinimize} 
                   toggleMaximize={toggleMaximize} 
-                  handleClose={handleClose} />
-      <TaskBar windows={windows} toggleMinimize={toggleMinimize} />
+                  handleClose={handleClose}
+                  focusedWindow={focusedWindow}
+                  bringToFront={bringToFront} />
+      <TaskBar windows={windows} toggleMinimize={toggleMinimize} focusedWindow={focusedWindow} bringToFront={bringToFront} />
     </main>
   )
 }
