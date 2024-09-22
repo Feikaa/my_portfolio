@@ -3,6 +3,7 @@ import { Rnd } from 'react-rnd';
 import { Worker, Viewer, SpecialZoomLevel } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import Resume from '../pdfs/Resume.pdf';
+import Folder from './Folder.jsx';
 import '../WindowTypes.jsx';
 
 function Window(props) {
@@ -41,16 +42,16 @@ function Window(props) {
 
   return (
     <div className='w-full absolute -translate-x-2 -translate-y-2 overflow-hidden pointer-events-none' style={{ height: `calc(100vh - 56px)`, display: minimized ? 'none' : 'block', zIndex: focusedWindow === name ? 3 : 1 }}>
-    <Rnd className='flex bg-white border-2 flex-col pointer-events-auto' 
+    <Rnd className='flex bg-slate-600 flex-col pointer-events-auto' 
      size={isPhone ? { width: '100vw', height: '100vh' } : maximized ? { width: '100vw', height: '100vh' } : size}
      position={isPhone ? { x: 0, y: 0 } : maximized ? { x: 0, y: 0 } : position}
      maxHeight={'calc(100vh - 56px)'}
      onDragStop={handleDragStop}
      onResizeStop={handleResizeStop}
      minWidth={300} minHeight={300} dragHandleClassName='custom-header' bounds="parent" onMouseDown={bringToFront}>
-      <div className='flex flex-col h-full border-2 border-solid relative'>
+      <div className='flex flex-col h-full border-2 border-black/70 border-solid relative'>
         <div className='px-4 py-2 cursor-move select-none flex items-center justify-center custom-header'>
-          <span className='font-semibold'>{name}</span>
+          <span className='font-semibold'>{name === "Folder" ? "Projects" : name === "Email" ? "Contact" : name}</span>
           {!isPhone ? <div className='flex space-x-2 ml-auto'>
           <button className='w-6 h-6 flex justify-center items-center hover:bg-blue-500 transition rounded' onClick={toggleMinimize}>_</button>
           <button className='w-6 h-6 flex justify-center items-center hover:bg-blue-500 transition rounded' onClick={toggleMaximize}>{maximized ? '🗗' : '🗖'}</button>
@@ -68,7 +69,9 @@ function Window(props) {
               <Viewer fileUrl={Resume} defaultScale={SpecialZoomLevel.PageWidth} />
             </Worker>
             :
-            "TODO"}
+            name === "Folder" ?
+              <Folder />
+            : "TODO"}
           {/* </div> */}
         </div>
       </div>

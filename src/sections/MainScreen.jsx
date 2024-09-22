@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PDF from '../icons/pdf.svg';
 import Folder from '../icons/folder.svg';
+import Mail from '../icons/mail.svg';
 import Grid from '@mui/material/Grid2';
 import Draggable from 'react-draggable';
 import Window from './Window';
@@ -11,10 +12,10 @@ const MainScreen = (props) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [pressing, setPressing] = useState(false);
-  const [icons, setIcons] = useState([PDF, Folder]);
-  const [windowTypes, setWindowTypes] = useState([WindowType.Resume, WindowType.Folder]);
-  const [names, setNames] = useState(["My Resume", "My Projects"]);
-  const [positions, setPositions] = useState([{ x: 0, y: 0}, { x: 120, y: 0}]);
+  const [icons, setIcons] = useState([PDF, Folder, Mail]);
+  const [windowTypes, setWindowTypes] = useState([WindowType.Resume, WindowType.Folder, WindowType.Email]);
+  const [names, setNames] = useState(["My Resume", "My Projects", "Contact Me"]);
+  const [positions, setPositions] = useState([{ x: 0, y: 0}, { x: 120, y: 0}, { x: 240, y: 0}]);
   const handleClose = props.handleClose;
   const openWindow = props.openWindow;
   const windows = props.windows;
@@ -53,6 +54,7 @@ const MainScreen = (props) => {
     //   setMinimized((prev) => [...prev, false]);
     // }
     openWindow(file);
+    bringToFront(file);
   }
 
   const snapToGrid = (x,y) => {
