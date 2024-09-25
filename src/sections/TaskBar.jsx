@@ -30,7 +30,7 @@ const TaskBar = (props) => {
         }
         {windows.map((window, index) => {
           return (
-            <div className={`flex rounded ${window.minimized ? 'shadow-inner' : focusedWindow === window.id ? 'shadow-none' : 'shadow-sm'} shadow-black items-center justify-center bg-blue-400 w-40 h-8 hover:bg-blue-300 select-none`} 
+            <div key={index} className={`flex rounded ${window.minimized ? 'shadow-inner' : focusedWindow === window.id ? 'shadow-none' : 'shadow-sm'} shadow-black items-center justify-center bg-blue-400 w-40 h-8 hover:bg-blue-300 select-none`} 
               onClick={() => {
                 if (focusedWindow === window.id || window.minimized) {
                   toggleMinimize(window.id);

@@ -4,6 +4,7 @@ import { Worker, Viewer, SpecialZoomLevel } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import Resume from '../pdfs/Resume.pdf';
 import Folder from './Folder.jsx';
+import Email from './Email.jsx';
 import '../WindowTypes.jsx';
 
 function Window(props) {
@@ -71,7 +72,11 @@ function Window(props) {
             :
             name === "Folder" ?
               <Folder />
-            : "TODO"}
+            :
+            name === "Email" ?
+              <Email />
+            :
+            ""}
           {/* </div> */}
         </div>
       </div>
