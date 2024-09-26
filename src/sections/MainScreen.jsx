@@ -153,6 +153,8 @@ const MainScreen = (props) => {
                         onResize={(newSize) => updateWindow(window.id, { size: newSize })} 
                         toggleMaximize={() => toggleMaximize(window.id)} 
                         toggleMinimize={() => toggleMinimize(window.id)} 
+                        windowWidth={window.size.width}
+                        windowHeight={window.size.height}
                         width={width} 
                         handleClose={() => handleClose(window.id)}
                         bringToFront={() => bringToFront(window.id)}

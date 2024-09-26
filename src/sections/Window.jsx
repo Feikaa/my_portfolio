@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Rnd } from 'react-rnd';
 import { Worker, Viewer, SpecialZoomLevel } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
@@ -23,6 +23,8 @@ function Window(props) {
   const focusedWindow = props.focusedWindow;
   const bringToFront = props.bringToFront;
   const isPhone = width <= 768;
+  const windowWidth = props.windowWidth;
+  const windowHeight = props.windowHeight;
 
   const handleDragStop = (e, d) => {
     onMove({ x: d.x, y: d.y });
@@ -43,7 +45,7 @@ function Window(props) {
 
   return (
     <div className='w-full absolute -translate-x-2 -translate-y-2 overflow-hidden pointer-events-none' style={{ height: `calc(100vh - 56px)`, display: minimized ? 'none' : 'block', zIndex: focusedWindow === name ? 3 : 1 }}>
-    <Rnd className='flex bg-slate-600 flex-col pointer-events-auto' 
+    <Rnd className={`flex ${name === "Email" ? "bg-slate-100" : "bg-slate-600"} flex-col pointer-events-auto`} 
      size={isPhone ? { width: '100vw', height: '100vh' } : maximized ? { width: '100vw', height: '100vh' } : size}
      position={isPhone ? { x: 0, y: 0 } : maximized ? { x: 0, y: 0 } : position}
      maxHeight={'calc(100vh - 56px)'}
@@ -63,7 +65,7 @@ function Window(props) {
           <button className='w-6 h-6 flex justify-center items-center hover:bg-red-500 transition rounded cursor-pointer' onClick={handleClose}>X</button>
           </div>}
         </div>
-        <div className='flex-grow overflow-hidden'>
+        <div className='flex-grow overflow-y-auto overflow-x-hidden'>
           {/* <div className='bg-transparent z-10 top-0 bottom-0 right-0 left-0'> */}
             {name === "Resume" ?
               <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
@@ -74,7 +76,7 @@ function Window(props) {
               <Folder />
             :
             name === "Email" ?
-              <Email />
+              <Email width={windowWidth} height={windowHeight} maximized={maximized} isPhone={isPhone} />
             :
             ""}
           {/* </div> */}
