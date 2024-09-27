@@ -66,7 +66,7 @@ function Email(props) {
       <br />
       <div className='px-4'>
         <ReCAPTCHA sitekey={import.meta.env.VITE_SITE_KEY} ref={recaptcha} className='inline-block' />
-        <Button type="submit" variant='contained' endIcon={<SendIcon />} className='float-right'>Send</Button>
+        <Button type="submit" variant='contained' endIcon={<SendIcon />} className='float-right' disabled={emailError}>Send</Button>
       </div>
     </form>
   )
