@@ -14,7 +14,7 @@ function About() {
     </div>
     <div>
         <h1 className='text-3xl font-bold mb-4'>Hi! I'm Paul.</h1>
-          I grew up in Sarnia, Ontario. In school, I gravitated towards math, and spent a lot of my free time on the computer. I quickly learned how much I adored computers, and learned everything I could about them. In high school, I tried programming for the first
+        I grew up in Sarnia, Ontario. In school, I gravitated towards math, and spent a lot of my free time on the computer. I quickly learned how much I adored computers, and learned everything I could about them. In high school, I tried programming for the first
         time, along with basic HTML, which is when I seriously considered becoming a programmer, so I applied to McMaster University for a Computer Science major in 2018. During my first year in university, I took a programming class, and the satisfaction and joy I felt from creating my first program was when I knew I picked the right career path. From then
         on, my passion and love for creating things through programming has stayed strong.
         
@@ -59,7 +59,7 @@ function About() {
           <Tooltip title={
             <React.Fragment>
               <Typography variant="h6">Projects using NodeJS</Typography>
-              <Typography variant='body1  '>
+              <Typography variant='body1'>
                 - <a href='https://github.com/Feikaa/realm-harvest' target='_blank' className='text-blue-300 underline'>Realm Harvest</a><br />
                 - <a href='https://github.com/Feikaa/my_portfolio' target='_blank' className='text-blue-300 underline'>This Portfolio!</a><br />
               </Typography>
