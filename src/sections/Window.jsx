@@ -46,7 +46,7 @@ function Window(props) {
 
   return (
     <div className='w-full absolute -translate-x-2 -translate-y-2 overflow-hidden pointer-events-none' style={{ height: `calc(100vh - 56px)`, display: minimized ? 'none' : 'block', zIndex: focusedWindow === name ? 3 : 1 }}>
-    <Rnd className={`flex ${name === "Email" ? "bg-slate-100" : "bg-slate-600"} flex-col pointer-events-auto`} disableDragging={isPhone ? true : maximized ? true : false}
+    <Rnd className={`flex ${name === "Email" ? "bg-slate-100" : name === "About" ? "bg-slate-100" : "bg-slate-600"} flex-col pointer-events-auto`} disableDragging={isPhone ? true : maximized ? true : false}
      size={isPhone ? { width: '100vw', height: '100vh' } : maximized ? { width: '100vw', height: '100vh' } : size}
      position={isPhone ? { x: 0, y: 0 } : maximized ? { x: 0, y: 0 } : position}
      maxHeight={'calc(100vh - 56px)'}
