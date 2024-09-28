@@ -5,6 +5,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import Resume from '../pdfs/Resume.pdf';
 import Folder from './Folder.jsx';
 import Email from './Email.jsx';
+import About from './About.jsx';
 import '../WindowTypes.jsx';
 
 function Window(props) {
@@ -45,7 +46,7 @@ function Window(props) {
 
   return (
     <div className='w-full absolute -translate-x-2 -translate-y-2 overflow-hidden pointer-events-none' style={{ height: `calc(100vh - 56px)`, display: minimized ? 'none' : 'block', zIndex: focusedWindow === name ? 3 : 1 }}>
-    <Rnd className={`flex ${name === "Email" ? "bg-slate-100" : "bg-slate-600"} flex-col pointer-events-auto`} 
+    <Rnd className={`flex ${name === "Email" ? "bg-slate-100" : "bg-slate-600"} flex-col pointer-events-auto`} disableDragging={isPhone ? true : maximized ? true : false}
      size={isPhone ? { width: '100vw', height: '100vh' } : maximized ? { width: '100vw', height: '100vh' } : size}
      position={isPhone ? { x: 0, y: 0 } : maximized ? { x: 0, y: 0 } : position}
      maxHeight={'calc(100vh - 56px)'}
@@ -77,6 +78,9 @@ function Window(props) {
             :
             name === "Email" ?
               <Email width={windowWidth} height={windowHeight} maximized={maximized} isPhone={isPhone} />
+            :
+            name === "About" ?
+              <About />
             :
             ""}
           {/* </div> */}

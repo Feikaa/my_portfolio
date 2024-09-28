@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PDF from '../icons/pdf.svg';
 import Folder from '../icons/folder.svg';
 import Mail from '../icons/mail.svg';
+import Person from '../icons/person.svg';
 import Grid from '@mui/material/Grid2';
 import Draggable from 'react-draggable';
 import Window from './Window';
@@ -12,10 +13,11 @@ const MainScreen = (props) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [pressing, setPressing] = useState(false);
-  const [icons, setIcons] = useState([PDF, Folder, Mail]);
-  const [windowTypes, setWindowTypes] = useState([WindowType.Resume, WindowType.Folder, WindowType.Email]);
-  const [names, setNames] = useState(["My Resume", "My Projects", "Contact Me"]);
-  const [positions, setPositions] = useState([{ x: 0, y: 0}, { x: 120, y: 0}, { x: 240, y: 0}]);
+  const [icons, setIcons] = useState([PDF, Folder, Mail, Person]);
+  const [windowTypes, setWindowTypes] = useState([WindowType.Resume, WindowType.Folder, WindowType.Email, WindowType.About]);
+  const [names, setNames] = useState(["My Resume", "My Projects", "Contact Me", "About Me"]);
+  const [positions, setPositions] = useState([{ x: 0, y: 0}, { x: 0, y: 120}, { x: 0, y: 240 }, { x: 0, y: 360 }]);
+  const [dragging, setDragging] = useState(false);
   const handleClose = props.handleClose;
   const openWindow = props.openWindow;
   const windows = props.windows;
@@ -126,9 +128,14 @@ const MainScreen = (props) => {
             {icons.map((c, index) => {
               // if (c !== null) {
                 return (
-                    <Draggable position={positions[index]} onStop={(e, ui) => handleStop(e, ui, index)} onTouchEnd={(e, ui) => handleStop(e, ui, index)}>
+                    <Draggable position={positions[index]} onDrag={() => setDragging(true)} onStop={(e, ui) => handleStop(e, ui, index)} onTouchEnd={(e, ui) => handleStop(e, ui, index)}>
                       <Grid item>
-                        <div onDoubleClick={() => {handleDblClick(windowTypes[index])}} tabIndex="0" className={`absolute items-center justify-center align-middle flex-col w-28 h-28 text-white text-center ${pressing ? '' : 'hover:bg-sky-500 focus-within:bg-blue-500'}`}><img src={icons[index]} key={c} className='w-16 h-16 pointer-events-none block m-auto' /><div className='text-sm w-16 h-8 block m-auto'>{names[index]}</div></div>
+                        <div onDoubleClick={() => {handleDblClick(windowTypes[index])}} onTouchEnd={() => {
+                          if (!dragging) {
+                            handleDblClick(windowTypes[index]);
+                          }
+                          setDragging(false);
+                        }} tabIndex="0" className={`absolute items-center justify-center align-middle flex-col w-28 h-28 text-white text-center ${pressing ? '' : 'hover:bg-sky-400/50 focus-within:bg-blue-500/70'}`}><img src={icons[index]} key={c} className='w-16 h-16 pointer-events-none block m-auto' /><div className='text-sm w-16 h-8 block m-auto'>{names[index]}</div></div>
                       </Grid>
                   </Draggable>
                   )
