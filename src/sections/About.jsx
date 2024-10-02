@@ -75,7 +75,7 @@ function About() {
               <Typography variant="h6">Projects using AWS</Typography>
               <Typography variant='body1'>
               - <a href='https://github.com/Feikaa/my_portfolio' target='_blank' className='text-blue-300 underline'>This Portfolio!</a><br />
-                <p className='indent-6 text-sm'>- API Gateway, Lambda, S3, and Cloudfront</p></Typography>
+                <p className='indent-6 text-sm'>- Route 53, S3, Cloudfront, API Gateway, and Lambda</p></Typography>
             </React.Fragment>
           } placement='top' arrow>
           <div className='transition duration-300 ease-in-out transform hover:scale-110'>
