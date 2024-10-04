@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Rnd } from 'react-rnd';
 import { Worker, Viewer, SpecialZoomLevel } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
-import Resume from '../pdfs/Resume.pdf';
 import Folder from './Folder.jsx';
 import Email from './Email.jsx';
 import About from './About.jsx';
@@ -70,7 +69,7 @@ function Window(props) {
           {/* <div className='bg-transparent z-10 top-0 bottom-0 right-0 left-0'> */}
             {name === "Resume" ?
               <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
-              <Viewer fileUrl={Resume} defaultScale={SpecialZoomLevel.PageWidth} />
+              <Viewer fileUrl="https://paul-lee-resume.s3.amazonaws.com/Resume.pdf" defaultScale={SpecialZoomLevel.PageWidth} />
             </Worker>
             :
             name === "Folder" ?

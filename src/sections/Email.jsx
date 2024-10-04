@@ -34,19 +34,27 @@ function Email(props) {
         } else {
 
           // Change to prod whenever building
-          fetch(`https://5al0mnbgri.execute-api.us-east-1.amazonaws.com/prod/email?email_subject=${subject}&from_name=${email}&message=${message}`, {
+          fetch(`https://s0csuld2r4.execute-api.us-east-1.amazonaws.com/prod/email`, {
             method: 'POST',
-            mode: 'cors',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ recaptcha: captchaValue })
+            body: JSON.stringify({ 
+              "email_subject": subject, 
+              "from_name": email,
+              "message": message,
+              "recaptcha": captchaValue
+            })
           })
-          .then((result) => {
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(response);
+            } else {
               recaptcha.current.reset();
               setSubject("");
               setEmail("");
               setMessage("");
+            }
           })
           .catch((error) => {
             console.log(error);
